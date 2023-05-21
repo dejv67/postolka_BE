@@ -1,2 +1,16 @@
+# Server configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /api
 
+# Database configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postolka_res_system
+    username: appUser
+    password: postolka_DB
+  jpa:
+    hibernate:
+      ddl-auto: update
 

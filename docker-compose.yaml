@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postolka_res_system
+      POSTGRES_USER: appUser
+      POSTGRES_PASSWORD: postolka_DB
+    ports:
+      - 5432:5432
