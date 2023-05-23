@@ -9,5 +9,4 @@ public class PostolkaBeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PostolkaBeApplication.class, args);
 	}
-
 }

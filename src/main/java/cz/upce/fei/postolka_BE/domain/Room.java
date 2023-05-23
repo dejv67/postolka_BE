@@ -1,7 +1,9 @@
 package cz.upce.fei.postolka_BE.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -35,4 +37,6 @@ public class Room {
     @ToString.Exclude // It will prevent to infinity loop in Lombok ToString generation because field from each class points to themselves
     @JsonIgnore
     private List<Reservation> reservations = Collections.emptyList();
+
+
 }
