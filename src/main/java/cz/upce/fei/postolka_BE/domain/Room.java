@@ -1,12 +1,10 @@
 package cz.upce.fei.postolka_BE.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 import cz.upce.fei.postolka_BE.dto.RoomResponseDtoV1;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.Collections;
 import java.util.List;

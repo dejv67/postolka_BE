@@ -4,13 +4,14 @@ import cz.upce.fei.postolka_BE.domain.Reservation;
 import cz.upce.fei.postolka_BE.domain.Room;
 import cz.upce.fei.postolka_BE.domain.State;
 import cz.upce.fei.postolka_BE.domain.User;
-import cz.upce.fei.postolka_BE.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,12 @@ import java.util.List;
 public class ReservationInputDtoV1 {
 
     @NotNull
-    private LocalDateTime fromDate;
+    private LocalDate fromDate;
 
     @NotNull
-    private LocalDateTime toDate;
+    private LocalDate toDate;
 
+    @Size(max = 500)
     private String note;
 
     @NotNull
@@ -40,6 +42,7 @@ public class ReservationInputDtoV1 {
 
     @NotNull
     @NotBlank
+    @Size(max = 50)
     private String modifUser;
 
     @NotNull

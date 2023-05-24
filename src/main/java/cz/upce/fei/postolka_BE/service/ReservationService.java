@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
 
     @Transactional(readOnly = true)
-    public List<Reservation> findByFromDateBetween(LocalDateTime fromDate, LocalDateTime toDate) throws ResourceNotFoundException {
+    public List<Reservation> findByFromDateBetween(LocalDate fromDate, LocalDate toDate) throws ResourceNotFoundException {
         var result = reservationRepository.findByFromDateGreaterThanEqualAndToDateLessThanEqual(fromDate, toDate);
 
         if (result.isEmpty()) {

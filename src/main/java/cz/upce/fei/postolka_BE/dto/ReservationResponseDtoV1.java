@@ -1,15 +1,11 @@
 package cz.upce.fei.postolka_BE.dto;
 
-import cz.upce.fei.postolka_BE.domain.Room;
 import cz.upce.fei.postolka_BE.domain.State;
-import cz.upce.fei.postolka_BE.domain.User;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,9 +13,9 @@ public class ReservationResponseDtoV1 {
 
     private long id;
 
-    private LocalDateTime fromDate;
+    private LocalDate fromDate;
 
-    private LocalDateTime toDate;
+    private LocalDate toDate;
 
     private String note;
 
@@ -31,7 +27,7 @@ public class ReservationResponseDtoV1 {
 
     private String modifUser;
 
-    public ReservationResponseDtoV1(long id, LocalDateTime fromDate, LocalDateTime toDate, String note, State state,
+    public ReservationResponseDtoV1(long id, LocalDate fromDate, LocalDate toDate, String note, State state,
                                     LocalDateTime createDate, LocalDateTime modifDate, String modifUser) {
         this.id = id;
         this.fromDate = fromDate;

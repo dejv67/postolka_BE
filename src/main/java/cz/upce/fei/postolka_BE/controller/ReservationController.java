@@ -1,7 +1,6 @@
 package cz.upce.fei.postolka_BE.controller;
 
 import cz.upce.fei.postolka_BE.domain.Reservation;
-import cz.upce.fei.postolka_BE.domain.User;
 import cz.upce.fei.postolka_BE.dto.ReservationInputDtoV1;
 import cz.upce.fei.postolka_BE.dto.ReservationResponseDtoV1;
 import cz.upce.fei.postolka_BE.exception.ResourceNotFoundException;
@@ -11,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,10 +44,10 @@ public class ReservationController {
     public ResponseEntity<?> findByDateBetween(@RequestParam("fromDate") String fromDate,
                                          @RequestParam("toDate") String toDate) throws ResourceNotFoundException {
 
-        String pattern = "yyyy-MM-dd HH:mm:ss";
+        String pattern = "yyyy-MM-dd";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        LocalDateTime fromDateConverted = LocalDateTime.parse(fromDate,formatter);
-        LocalDateTime toDateConverted = LocalDateTime.parse(toDate,formatter);
+        LocalDate fromDateConverted = LocalDate.parse(fromDate,formatter);
+        LocalDate toDateConverted = LocalDate.parse(toDate,formatter);
 
         var result = reservationService.findByFromDateBetween(fromDateConverted, toDateConverted);
 

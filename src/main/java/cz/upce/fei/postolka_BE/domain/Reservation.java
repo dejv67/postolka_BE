@@ -12,6 +12,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -28,10 +29,10 @@ public class Reservation {
     private long id;
 
     @Column
-    private LocalDateTime fromDate;
+    private LocalDate fromDate;
 
     @Column
-    private LocalDateTime toDate;
+    private LocalDate toDate;
 
     @Column
     private String note;
@@ -68,7 +69,7 @@ public class Reservation {
     private List<Room> rooms = Collections.emptyList();
 
 
-    public Reservation(long id, LocalDateTime fromDate, LocalDateTime toDate, String note, State state,
+    public Reservation(long id, LocalDate fromDate, LocalDate toDate, String note, State state,
                        LocalDateTime createDate, LocalDateTime modifDate, String modifUser) {
         this.id = id;
         this.fromDate = fromDate;
@@ -80,7 +81,7 @@ public class Reservation {
         this.modifUser = modifUser;
     }
 
-    public Reservation(LocalDateTime fromDate, LocalDateTime toDate, String note, State state, LocalDateTime createDate,
+    public Reservation(LocalDate fromDate, LocalDate toDate, String note, State state, LocalDateTime createDate,
                        LocalDateTime modifDate, String modifUser) {
         this.fromDate = fromDate;
         this.toDate = toDate;
