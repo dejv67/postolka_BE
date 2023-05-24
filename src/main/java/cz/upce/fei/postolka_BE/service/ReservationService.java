@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,7 +19,7 @@ public class ReservationService {
 
     @Transactional(readOnly = true)
     public List<Reservation> findByFromDateBetween(LocalDateTime fromDate, LocalDateTime toDate) throws ResourceNotFoundException {
-        var result = reservationRepository.findByFromDateBetween(fromDate, toDate);
+        var result = reservationRepository.findByFromDateGreaterThanEqualAndToDateLessThanEqual(fromDate, toDate);
 
         if (result.isEmpty()) {
             throw new ResourceNotFoundException();
@@ -34,6 +35,19 @@ public class ReservationService {
             throw new ResourceNotFoundException();
         }
         return result.get();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Reservation> findAll() throws ResourceNotFoundException {
+        var iterable = reservationRepository.findAll();
+
+        List<Reservation> result = new ArrayList<Reservation>();
+        iterable.forEach(result::add);
+
+        if (result.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+        return result;
     }
 
     @Transactional

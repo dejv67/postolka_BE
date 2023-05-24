@@ -3,7 +3,7 @@ package cz.upce.fei.postolka_BE.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
+import cz.upce.fei.postolka_BE.dto.RoomResponseDtoV1;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -13,6 +13,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@Table(name = "room", schema = "postolka_reservation_system")
 @Entity
 public class Room {
 
@@ -28,15 +29,17 @@ public class Room {
     @Column(name = "num_of_beds")
     private int numOfBeds;
 
-    @ManyToMany
-    @JoinTable(
-            name = "reserved_rooms",
-            joinColumns = @JoinColumn(name = "room_id"),
-            inverseJoinColumns = @JoinColumn(name = "reservation_id")
-    )
-    @ToString.Exclude // It will prevent to infinity loop in Lombok ToString generation because field from each class points to themselves
-    @JsonIgnore
+    @ManyToMany(mappedBy = "rooms")
     private List<Reservation> reservations = Collections.emptyList();
 
+
+    public RoomResponseDtoV1 toDto(){
+        return new RoomResponseDtoV1(
+                getId(),
+                getName(),
+                getDescription(),
+                getNumOfBeds()
+        );
+    }
 
 }

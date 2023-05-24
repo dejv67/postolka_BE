@@ -11,7 +11,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class UserResponseDtoV1 {
 
     private Long Id;
@@ -27,8 +26,6 @@ public class UserResponseDtoV1 {
     private Role role;
 
     private LocalDateTime modifDate;
-
-    private List<ReservationResponseDtoV1> reservations = Collections.emptyList();
 
     public UserResponseDtoV1(Long id, String name, String surname, String email, String password, Role role, LocalDateTime modifDate) {
         this.Id = id;

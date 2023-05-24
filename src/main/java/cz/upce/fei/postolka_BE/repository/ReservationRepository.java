@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface ReservationRepository extends PagingAndSortingRepository<Reservation, Long> {
-    List<Reservation> findByFromDateBetween(LocalDateTime fromDate, LocalDateTime toDate);
+    List<Reservation> findByFromDateGreaterThanEqualAndToDateLessThanEqual(LocalDateTime fromDate, LocalDateTime toDate);
 }

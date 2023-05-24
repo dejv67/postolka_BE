@@ -19,6 +19,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "reservation", schema = "postolka_reservation_system")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class)
 public class Reservation {
 
@@ -55,12 +56,20 @@ public class Reservation {
     @JsonIgnore
     private User author;
 
-    @ManyToMany(mappedBy = "reservations")
+    @ManyToMany
+    @JoinTable(
+            schema = "postolka_reservation_system",
+            name = "reserved_rooms",
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id")
+    )
+    @ToString.Exclude // It will prevent to infinity loop in Lombok ToString generation because field from each class points to themselves
+    @JsonIgnore
     private List<Room> rooms = Collections.emptyList();
 
 
     public Reservation(long id, LocalDateTime fromDate, LocalDateTime toDate, String note, State state,
-                       LocalDateTime createDate, LocalDateTime modifDate, String modifUser, User author) {
+                       LocalDateTime createDate, LocalDateTime modifDate, String modifUser) {
         this.id = id;
         this.fromDate = fromDate;
         this.toDate = toDate;
@@ -69,11 +78,10 @@ public class Reservation {
         this.createDate = createDate;
         this.modifDate = modifDate;
         this.modifUser = modifUser;
-        this.author = author;
     }
 
     public Reservation(LocalDateTime fromDate, LocalDateTime toDate, String note, State state, LocalDateTime createDate,
-                       LocalDateTime modifDate, String modifUser, User author) {
+                       LocalDateTime modifDate, String modifUser) {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.note = note;
@@ -81,7 +89,6 @@ public class Reservation {
         this.createDate = createDate;
         this.modifDate = modifDate;
         this.modifUser = modifUser;
-        this.author = author;
     }
 
     public ReservationResponseDtoV1 toDto(){
@@ -93,8 +100,7 @@ public class Reservation {
                 getState(),
                 getCreateDate(),
                 getModifDate(),
-                getModifUser(),
-                getAuthor()
+                getModifUser()
         );
     }
 }

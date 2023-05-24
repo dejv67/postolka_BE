@@ -10,7 +10,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class RoomResponseDtoV1 {
 
     private long id;
@@ -20,8 +19,6 @@ public class RoomResponseDtoV1 {
     private String description;
 
     private int numOfBeds;
-
-    private List<Reservation> reservations = Collections.emptyList();
 
     public RoomResponseDtoV1(long id, String name, String description, int numOfBeds) {
         this.id = id;

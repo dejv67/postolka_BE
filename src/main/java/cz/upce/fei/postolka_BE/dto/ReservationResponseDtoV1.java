@@ -13,7 +13,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class ReservationResponseDtoV1 {
 
     private long id;
@@ -32,12 +31,8 @@ public class ReservationResponseDtoV1 {
 
     private String modifUser;
 
-    private User author;
-
-    private List<Room> rooms = Collections.emptyList();
-
     public ReservationResponseDtoV1(long id, LocalDateTime fromDate, LocalDateTime toDate, String note, State state,
-                                    LocalDateTime createDate, LocalDateTime modifDate, String modifUser, User author) {
+                                    LocalDateTime createDate, LocalDateTime modifDate, String modifUser) {
         this.id = id;
         this.fromDate = fromDate;
         this.toDate = toDate;
@@ -46,6 +41,5 @@ public class ReservationResponseDtoV1 {
         this.createDate = createDate;
         this.modifDate = modifDate;
         this.modifUser = modifUser;
-        this.author = author;
     }
 }
