@@ -3,7 +3,7 @@ package cz.upce.fei.postolka_BE.controller;
 import cz.upce.fei.postolka_BE.domain.Reservation;
 import cz.upce.fei.postolka_BE.domain.Room;
 import cz.upce.fei.postolka_BE.dto.RoomResponseDtoV1;
-import cz.upce.fei.postolka_BE.exception.ResourceNotFoundException;
+import cz.upce.fei.postolka_BE.service.exception.ResourceNotFoundException;
 import cz.upce.fei.postolka_BE.service.ReservationService;
 import cz.upce.fei.postolka_BE.service.RoomService;
 import lombok.AllArgsConstructor;

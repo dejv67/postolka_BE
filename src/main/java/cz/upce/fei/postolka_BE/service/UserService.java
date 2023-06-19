@@ -1,7 +1,7 @@
 package cz.upce.fei.postolka_BE.service;
 
 import cz.upce.fei.postolka_BE.domain.User;
-import cz.upce.fei.postolka_BE.exception.ResourceNotFoundException;
+import cz.upce.fei.postolka_BE.service.exception.ResourceNotFoundException;
 import cz.upce.fei.postolka_BE.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

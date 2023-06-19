@@ -1,4 +1,4 @@
-package cz.upce.fei.postolka_BE.jwt_security;
+package cz.upce.fei.postolka_BE.configuration.jwt.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

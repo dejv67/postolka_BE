@@ -2,7 +2,7 @@ package cz.upce.fei.postolka_BE.controller;
 
 import cz.upce.fei.postolka_BE.dto.UserInputDtoV1;
 import cz.upce.fei.postolka_BE.dto.UserResponseDtoV1;
-import cz.upce.fei.postolka_BE.exception.ResourceNotFoundException;
+import cz.upce.fei.postolka_BE.service.exception.ResourceNotFoundException;
 import cz.upce.fei.postolka_BE.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

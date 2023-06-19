@@ -1,13 +1,10 @@
 package cz.upce.fei.postolka_BE.service;
 
 import cz.upce.fei.postolka_BE.domain.Reservation;
-import cz.upce.fei.postolka_BE.domain.Room;
 import cz.upce.fei.postolka_BE.dto.ReservationResponseDtoV1;
-import cz.upce.fei.postolka_BE.dto.RoomResponseDtoV1;
-import cz.upce.fei.postolka_BE.exception.ResourceNotFoundException;
+import cz.upce.fei.postolka_BE.service.exception.ResourceNotFoundException;
 import cz.upce.fei.postolka_BE.repository.ReservationRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

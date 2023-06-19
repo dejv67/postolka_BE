@@ -1,4 +1,4 @@
-package cz.upce.fei.postolka_BE.jwt_security;
+package cz.upce.fei.postolka_BE.configuration.jwt.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

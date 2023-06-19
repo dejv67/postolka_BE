@@ -1,8 +1,8 @@
 package cz.upce.fei.postolka_BE.controller;
 
-import cz.upce.fei.postolka_BE.jwt_security.JwtRequest;
-import cz.upce.fei.postolka_BE.jwt_security.JwtResponse;
-import cz.upce.fei.postolka_BE.jwt_security.JwtTokenUtil;
+import cz.upce.fei.postolka_BE.configuration.jwt.security.JwtRequest;
+import cz.upce.fei.postolka_BE.configuration.jwt.security.JwtResponse;
+import cz.upce.fei.postolka_BE.configuration.jwt.security.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
