@@ -1,0 +1,57 @@
+-- enum type
+
+CREATE TYPE role AS ENUM
+    ('USER', 'ADMIN');
+
+CREATE TYPE state AS ENUM
+    ('REQUESTED', 'CONFIRMED', 'REJECTED');
+
+
+--tables
+
+CREATE TABLE postolka_reservation_system.user
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(256) NOT NULL,
+    role ROLE NOT NULL,
+    modif_date TIMESTAMPTZ NOT NULL
+);
+
+CREATE TABLE postolka_reservation_system.room
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(500),
+    num_of_beds INTEGER NOT NULL
+);
+
+CREATE TABLE postolka_reservation_system.reservation
+(
+    id SERIAL PRIMARY KEY,
+    from_date DATE NOT NULL,
+    to_date DATE NOT NULL,
+    note VARCHAR(500),
+    state STATE NOT NULL,
+    create_date TIMESTAMPTZ NOT NULL,
+    modif_date TIMESTAMPTZ NOT NULL,
+    modif_user VARCHAR(50) NOT NULL,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES postolka_reservation_system.user (id)
+);
+
+CREATE TABLE postolka_reservation_system.reserved_rooms
+(
+    id SERIAL PRIMARY KEY,
+    reservation_id INTEGER NOT NULL,
+    room_id INTEGER NOT NULL,
+    FOREIGN KEY (reservation_id) REFERENCES postolka_reservation_system.reservation (id),
+    FOREIGN KEY (room_id) REFERENCES postolka_reservation_system.room (id)
+);
+
+
+
+
+
