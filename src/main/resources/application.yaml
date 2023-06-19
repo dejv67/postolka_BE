@@ -14,3 +14,18 @@ spring:
     hibernate:
       ddl-auto: update
 
+
+# Security configuration
+#  security:
+#    user:
+#      name: user
+#      password: pass
+
+
+#JWT token configuration
+jwt:
+  secret: hokrko
+  expiration: 3600000
+
+
+

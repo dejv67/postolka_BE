@@ -18,12 +18,9 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
 
     @Transactional(readOnly = true)
-    public List<Reservation> findByFromDateBetween(LocalDate fromDate, LocalDate toDate) throws ResourceNotFoundException {
-        var result = reservationRepository.findByFromDateGreaterThanEqualAndToDateLessThanEqual(fromDate, toDate);
+    public List<Reservation> findByDatesAndRoomId(LocalDate fromDate, LocalDate toDate, Long id) {
+        var result = reservationRepository.findByDatesAndRoomId(fromDate, toDate, id);
 
-        if (result.isEmpty()) {
-            throw new ResourceNotFoundException();
-        }
         return result;
     }
 

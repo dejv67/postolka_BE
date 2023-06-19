@@ -5,6 +5,7 @@ import cz.upce.fei.postolka_BE.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -44,11 +45,12 @@ public class UserInputDtoV1 {
     private LocalDateTime modifDate;
 
     public User toEntity() {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return new User(
                 getName(),
                 getSurname(),
                 getEmail(),
-                getPassword(),
+                passwordEncoder.encode(getPassword()),
                 Role.valueOf(getRole()),
                 getModifDate()
         );
@@ -56,12 +58,13 @@ public class UserInputDtoV1 {
     }
 
     public User toEntity(final long id) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return new User(
                 id,
                 getName(),
                 getSurname(),
                 getEmail(),
-                getPassword(),
+                passwordEncoder.encode(getPassword()),
                 Role.valueOf(getRole()),
                 getModifDate()
         );

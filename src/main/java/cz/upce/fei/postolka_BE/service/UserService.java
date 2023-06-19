@@ -4,12 +4,15 @@ import cz.upce.fei.postolka_BE.domain.User;
 import cz.upce.fei.postolka_BE.exception.ResourceNotFoundException;
 import cz.upce.fei.postolka_BE.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -17,10 +20,10 @@ public class UserService {
     public User findAllByEmailEquals(String email) throws ResourceNotFoundException {
         var result = userRepository.findByEmailEquals(email);
 
-        if (result.isEmpty()) {
+        if (result == null) {
             throw new ResourceNotFoundException();
         }
-        return result.get();
+        return result;
     }
 
 
@@ -49,4 +52,12 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmailEquals(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with username: " + email);
+        }
+        return user;
+    }
 }

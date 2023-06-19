@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/reservations")
+@RequestMapping("/reservation")
 @AllArgsConstructor
 public class ReservationController {
 
@@ -40,23 +40,23 @@ public class ReservationController {
         return ResponseEntity.ok(result.toDto());
     }
 
-    @GetMapping(path = "/dates", params = {"fromDate", "toDate"})
-    public ResponseEntity<?> findByDateBetween(@RequestParam("fromDate") String fromDate,
-                                         @RequestParam("toDate") String toDate) throws ResourceNotFoundException {
-
-        String pattern = "yyyy-MM-dd";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        LocalDate fromDateConverted = LocalDate.parse(fromDate,formatter);
-        LocalDate toDateConverted = LocalDate.parse(toDate,formatter);
-
-        var result = reservationService.findByFromDateBetween(fromDateConverted, toDateConverted);
-
-        return ResponseEntity.ok(result
-                .stream()
-                .map(Reservation::toDto)
-                .collect(Collectors.toList())
-        );
-    }
+//    @GetMapping(path = "/dates", params = {"fromDate", "toDate"})
+//    public ResponseEntity<?> findByDateBetween(@RequestParam("fromDate") String fromDate,
+//                                         @RequestParam("toDate") String toDate) throws ResourceNotFoundException {
+//
+//        String pattern = "yyyy-MM-dd";
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+//        LocalDate fromDateConverted = LocalDate.parse(fromDate,formatter);
+//        LocalDate toDateConverted = LocalDate.parse(toDate,formatter);
+//
+//        var result = reservationService.findByFromDateBetween(fromDateConverted, toDateConverted);
+//
+//        return ResponseEntity.ok(result
+//                .stream()
+//                .map(Reservation::toDto)
+//                .collect(Collectors.toList())
+//        );
+//    }
 
     @PostMapping("")
     public ResponseEntity<ReservationResponseDtoV1> create(@RequestBody @Validated final ReservationInputDtoV1 input) {
