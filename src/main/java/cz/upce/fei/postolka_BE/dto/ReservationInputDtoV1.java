@@ -65,21 +65,6 @@ public class ReservationInputDtoV1 {
         return linkForeignKeys(reservation);
     }
 
-    public Reservation toEntity(final long id){
-        Reservation reservation = new Reservation(
-                id,
-                getFromDate(),
-                getToDate(),
-                getNote(),
-                State.valueOf(getState()),
-                getCreateDate(),
-                getModifDate(),
-                getModifUser()
-        );
-
-        return linkForeignKeys(reservation);
-    }
-
     private Reservation linkForeignKeys(Reservation reservation){
         User user = new User();
         user.setId(getAuthor_id());

@@ -70,7 +70,7 @@ public class Reservation {
 
 
     public Reservation(long id, LocalDate fromDate, LocalDate toDate, String note, State state,
-                       LocalDateTime createDate, LocalDateTime modifDate, String modifUser) {
+                       LocalDateTime createDate, LocalDateTime modifDate, String modifUser, List<Room> rooms  ) {
         this.id = id;
         this.fromDate = fromDate;
         this.toDate = toDate;
@@ -79,6 +79,7 @@ public class Reservation {
         this.createDate = createDate;
         this.modifDate = modifDate;
         this.modifUser = modifUser;
+        this.rooms = rooms;
     }
 
     public Reservation(LocalDate fromDate, LocalDate toDate, String note, State state, LocalDateTime createDate,
@@ -101,7 +102,8 @@ public class Reservation {
                 getState(),
                 getCreateDate(),
                 getModifDate(),
-                getModifUser()
+                getModifUser(),
+                getRooms()
         );
     }
 }

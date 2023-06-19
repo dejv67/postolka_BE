@@ -1,15 +1,20 @@
 package cz.upce.fei.postolka_BE.service;
 
 import cz.upce.fei.postolka_BE.domain.Reservation;
+import cz.upce.fei.postolka_BE.domain.Room;
+import cz.upce.fei.postolka_BE.dto.ReservationResponseDtoV1;
+import cz.upce.fei.postolka_BE.dto.RoomResponseDtoV1;
 import cz.upce.fei.postolka_BE.exception.ResourceNotFoundException;
 import cz.upce.fei.postolka_BE.repository.ReservationRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -25,13 +30,15 @@ public class ReservationService {
     }
 
     @Transactional(readOnly = true)
-    public Reservation findById(Long id) throws ResourceNotFoundException {
-        var result = reservationRepository.findById(id);
+    public List<ReservationResponseDtoV1> findByUserId(Long id) throws ResourceNotFoundException {
+        var result = reservationRepository.findAllByAuthor_Id(id);
 
         if (result.isEmpty()) {
             throw new ResourceNotFoundException();
         }
-        return result.get();
+        return result.stream()
+                .map(Reservation::toDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

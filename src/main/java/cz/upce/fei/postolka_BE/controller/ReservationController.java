@@ -22,41 +22,12 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
-    @GetMapping("")
-    public ResponseEntity<List<ReservationResponseDtoV1>> findAll() throws ResourceNotFoundException {
-        var result = reservationService.findAll();
+    @GetMapping(path ="", params = {"userId"})
+    public ResponseEntity<?> findByUserId(@RequestParam final Long userId) throws ResourceNotFoundException {
+        var result = reservationService.findByUserId(userId);
 
-        return ResponseEntity.ok(result
-                .stream()
-                .map(Reservation::toDto)
-                .collect(Collectors.toList())
-        );
+        return ResponseEntity.ok(result);
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable final Long id) throws ResourceNotFoundException {
-        var result = reservationService.findById(id);
-
-        return ResponseEntity.ok(result.toDto());
-    }
-
-//    @GetMapping(path = "/dates", params = {"fromDate", "toDate"})
-//    public ResponseEntity<?> findByDateBetween(@RequestParam("fromDate") String fromDate,
-//                                         @RequestParam("toDate") String toDate) throws ResourceNotFoundException {
-//
-//        String pattern = "yyyy-MM-dd";
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-//        LocalDate fromDateConverted = LocalDate.parse(fromDate,formatter);
-//        LocalDate toDateConverted = LocalDate.parse(toDate,formatter);
-//
-//        var result = reservationService.findByFromDateBetween(fromDateConverted, toDateConverted);
-//
-//        return ResponseEntity.ok(result
-//                .stream()
-//                .map(Reservation::toDto)
-//                .collect(Collectors.toList())
-//        );
-//    }
 
     @PostMapping("")
     public ResponseEntity<ReservationResponseDtoV1> create(@RequestBody @Validated final ReservationInputDtoV1 input) {
@@ -64,12 +35,12 @@ public class ReservationController {
         return ResponseEntity.ok(result.toDto());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ReservationResponseDtoV1> update(@PathVariable final Long id, @RequestBody final ReservationInputDtoV1 input) {
-        var result = reservationService.update(input.toEntity(id));
-
-        return ResponseEntity.ok(result.toDto());
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<ReservationResponseDtoV1> update(@PathVariable final Long id, @RequestBody final ReservationInputDtoV1 input) {
+//        var result = reservationService.update(input.toEntity(id));
+//
+//        return ResponseEntity.ok(result.toDto());
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable final Long id) {

@@ -17,4 +17,5 @@ public interface ReservationRepository extends PagingAndSortingRepository<Reserv
             "or (r.fromDate >= :fDate and r.fromDate <= :tDate) or (r.toDate >= :fDate and r.toDate <= :tDate))")
     List<Reservation> findByDatesAndRoomId(@Param("fDate") LocalDate fDate, @Param("tDate") LocalDate tDate, @Param("roomId")Long roomId);
 
+    List<Reservation> findAllByAuthor_Id(@Param("authorId")Long authorId);
 }
