@@ -42,25 +42,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     protected void configure(HttpSecurity httpSecurity) throws Exception {
             //Configure CORS, CSRF, and other security settings
         httpSecurity
-                .csrf().disable() // Disable CSRF protection for simplicity (possible enable it for production)
-                .cors().disable(); // Enable CORS configuration
-                //.and()
-//            .authorizeRequests()
-//                .antMatchers("/user/registration").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//            .formLogin()
-//                .loginPage("/login").permitAll()
-//                .and()
-//            .logout()
-//                .permitAll()
-//                .and()
-//            .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//                .and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-            //Add a JWT filter before UsernamePasswordAuthenticationFilter
-       // httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .cors()
+                    .and()
+                .csrf()
+                    .disable() // Disable CSRF protection for simplicity
+                .authorizeRequests()
+                    .antMatchers("/**").permitAll(); // Allow access to the login endpoint
+//                    .antMatchers("/user/registration/").permitAll()
+//                    .antMatchers("/login/**").permitAll() // Allow access to the login endpoint
+//                    .anyRequest().authenticated() // Require authentication for all other endpoints
+//                    .and()
+//                .sessionManagement()
+//                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Configure stateless session
+//
+//            //Add a JWT filter before UsernamePasswordAuthenticationFilter
+//        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

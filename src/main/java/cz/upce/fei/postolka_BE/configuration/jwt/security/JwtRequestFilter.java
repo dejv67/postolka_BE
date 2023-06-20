@@ -1,5 +1,6 @@
 package cz.upce.fei.postolka_BE.configuration.jwt.security;
 
+import cz.upce.fei.postolka_BE.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +22,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userDetailsService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
