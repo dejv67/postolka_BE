@@ -11,9 +11,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -38,18 +40,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // Configure CORS, CSRF, and other security settings
-        httpSecurity.csrf().disable();
-//                .cors();
-//                .authorizeRequests()
-//                .antMatchers("/login").permitAll()
+            //Configure CORS, CSRF, and other security settings
+        httpSecurity
+                .csrf().disable() // Disable CSRF protection for simplicity (possible enable it for production)
+                .cors().disable(); // Enable CORS configuration
+                //.and()
+//            .authorizeRequests()
+//                .antMatchers("/user/registration").permitAll()
 //                .anyRequest().authenticated()
 //                .and()
-//                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+//            .formLogin()
+//                .loginPage("/login").permitAll()
+//                .and()
+//            .logout()
+//                .permitAll()
+//                .and()
+//            .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 //                .and()
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        // Add a JWT filter before UsernamePasswordAuthenticationFilter
+            //Add a JWT filter before UsernamePasswordAuthenticationFilter
        // httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
@@ -57,10 +67,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://127.0.0.1:5173")
-                .allowedMethods("*")
-                .allowedHeaders("*")
-                .allowCredentials(true)
-                .maxAge(3600);
+                .allowedMethods("GET", "POST", "PUT", "DELETE") // Allowed HTTP methods
+                .allowedHeaders("Authorization", "Content-Type") // Allowed request headers
+                .allowCredentials(true) // Allow sending credentials (e.g., cookies) in CORS requests
+                .maxAge(3600); // Max age of the CORS pre-flight response cache
     }
 
     @Bean
