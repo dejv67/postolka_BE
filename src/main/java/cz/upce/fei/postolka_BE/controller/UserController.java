@@ -30,7 +30,7 @@ public class UserController {
         return ResponseEntity.ok(result.toDto());
     }
 
-    @PostMapping("")
+    @PostMapping("/registration")
     public ResponseEntity<UserResponseDtoV1> create(@RequestBody @Validated final UserInputDtoV1 input) {
         var result = userService.create(input.toEntity());
 
